@@ -10,3 +10,5 @@ How to run:
 - Go to the page http://localhost:8080/swagger-ui/index.html
 - There you can use the available endpoints to process data
 - For DB console: http://localhost:8080/h2-console/
+
+Uses sources from: https://github.com/opendevl/Json2Flat to transform Json to Csv
