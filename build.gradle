@@ -1,0 +1,67 @@
+plugins {
+    id 'org.springframework.boot' version '2.6.3'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+configurations {
+    all*.exclude module : 'spring-boot-starter-logging'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.codehaus.janino:commons-compiler:3.0.8"
+        mavenBom "org.codehaus.janino:janino:3.0.8"
+    }
+}
+
+dependencies {
+    implementation ('org.springframework.boot:spring-boot-starter-web') {
+        exclude (module: 'logback-classic')
+        exclude (module: "spring-boot-starter-logging")
+        exclude (module: "spring-boot-starter-validation")
+    }
+
+    implementation 'org.springdoc:springdoc-openapi-ui:1.6.3'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.13.1'
+    implementation 'com.jayway.jsonpath:json-path:2.2.0'
+    implementation 'com.google.code.gson:gson:2.8.0'
+    runtimeOnly 'com.h2database:h2'
+    compileOnly 'org.projectlombok:lombok:1.18.22'
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    implementation "org.codehaus.janino:commons-compiler:3.0.8"
+    implementation "org.codehaus.janino:janino:3.0.8"
+    implementation "org.springframework.boot:spring-boot-starter-tomcat:2.2.4.RELEASE"
+    implementation ("org.apache.spark:spark-core_2.11:2.4.5") {
+        exclude (module: 'slf4j-log4j12')
+        exclude (module: 'log4j')
+        exclude (module: 'commons-compiler')
+        exclude (module: 'janino')
+    }
+    implementation ("org.apache.spark:spark-sql_2.11:2.4.5") {
+        exclude (module: 'slf4j-log4j12')
+        exclude (module: 'log4j')
+        exclude (module: 'commons-compiler')
+        exclude (module: 'janino')
+    }
+//    implementation "com.fasterxml.jackson.core:jackson-databind:2.11.0"
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.13.1'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.1'
+    implementation "org.slf4j:log4j-over-slf4j:1.7.30"
+    implementation "org.slf4j:slf4j-api:1.7.30"
+    implementation "org.slf4j:slf4j-simple:1.7.30"
+}
+
+test {
+    useJUnitPlatform()
+}
